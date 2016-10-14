@@ -1,0 +1,36 @@
+{#
+ # Display paginator on page
+ #}
+{% macro display(paginated_results, url_template) %}
+    <ul class="pagination">
+        {% if paginated_results.isPreviousPageAvailable() %}
+            <li>
+                <a href="{{
+                    url_template|raw|replace({
+                        '%25pageNumber%25': paginated_results.getCurrentPage()-1
+                    })
+                }}">&laquo;</a>
+            </li>
+        {% endif %}
+
+        {% for cPage in range(1, paginated_results.getMaxPages()) %}
+            <li{% if cPage == paginated_results.getCurrentPage() %} class="active"{% endif %}>
+                <a href="{{
+                    url_template|replace({
+                        '%25pageNumber%25': cPage
+                    })
+                }}">{{ cPage }}</a>
+            </li>
+        {% endfor %}
+
+        {% if paginated_results.isNextPageAvailable() %}
+            <li>
+                <a href="{{
+                    url_template|replace({
+                        '%25pageNumber%25': paginated_results.getCurrentPage()+1
+                    })
+                }}">&raquo;</a>
+            </li>
+        {% endif %}
+    </ul>
+{% endmacro %}
