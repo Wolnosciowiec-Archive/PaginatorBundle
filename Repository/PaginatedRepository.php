@@ -56,7 +56,7 @@ trait PaginatedRepository
 
         $countQuery = clone $qb;
         $countQuery->select('count(p.id)');
-        $maxPages = round($countQuery->getQuery()->getSingleScalarResult() / $limit, 0, PHP_ROUND_HALF_UP);
+        $maxPages = ceil($countQuery->getQuery()->getSingleScalarResult() / $limit);
 
         $qb->setMaxResults($limit)
            ->setFirstResult($limit * ($page - 1));
