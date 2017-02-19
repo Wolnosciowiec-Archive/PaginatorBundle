@@ -1,5 +1,5 @@
 {
-  "name":        "wolnosciowiec/PaginatorBundle",
+  "name":        "wolnosciowiec/paginator-bundle",
   "description": "Simple pagination provider bundle, works well with Twig and Doctrine ORM",
   "license":     "LGPLv3",
   "type":        "library",
