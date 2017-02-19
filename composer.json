@@ -1,0 +1,21 @@
+{
+  "name":        "wolnosciowiec/PaginatorBundle",
+  "description": "Simple pagination provider bundle, works well with Twig and Doctrine ORM",
+  "license":     "LGPLv3",
+  "type":        "library",
+
+  "require": {
+    "php": ">=7.0",
+    "doctrine/orm": "~2.5"
+  },
+
+  "require-dev": {
+    "phpunit/phpunit": "~6.0"
+  },
+
+  "autoload": {
+    "psr-4": {
+        "PaginatorBundle\\": ""
+    }
+  }
+}
