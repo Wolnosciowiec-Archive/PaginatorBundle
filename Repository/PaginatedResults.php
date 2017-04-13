@@ -39,7 +39,7 @@ class PaginatedResults
      */
     public static function getPagesCount($resultsCount, $perPage)
     {
-        return round($resultsCount / $perPage, 0, PHP_ROUND_HALF_UP);
+        return (int)round($resultsCount / $perPage, 0, PHP_ROUND_HALF_UP);
     }
 
     /**
