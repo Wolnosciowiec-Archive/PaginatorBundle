@@ -1,7 +1,8 @@
-<?php
+<?php declare(strict_types = 1);
+
 namespace PaginatorBundle\Repository;
 
-class PaginatedResults
+class PaginatedResults implements \JsonSerializable
 {
     /**
      * @var array $results
@@ -20,9 +21,10 @@ class PaginatedResults
 
     public function __construct(array $results, $maxPages, $page)
     {
-        if ((int)$maxPages === 0)
+        if ((int)$maxPages === 0) {
             $maxPages = 1;
-
+        }
+            
         $this->results     = $results;
         $this->maxPages    = $maxPages;
         $this->currentPage = $page;
@@ -39,7 +41,7 @@ class PaginatedResults
      */
     public static function getPagesCount($resultsCount, $perPage)
     {
-        return (int)round($resultsCount / $perPage, 0, PHP_ROUND_HALF_UP);
+        return round($resultsCount / $perPage, 0, PHP_ROUND_HALF_UP);
     }
 
     /**
@@ -96,5 +98,18 @@ class PaginatedResults
     public function isPreviousPageAvailable()
     {
         return $this->currentPage > 1;
+    }
+
+    public function jsonSerialize()
+    {
+        return [
+            'results' =>                 $this->getResults(),
+            'maxPages' =>                $this->getMaxPages(),
+            'currentPage' =>             $this->getCurrentPage(),
+            'isPreviousPageAvailable' => $this->isPreviousPageAvailable(),
+            'isNextPageAvailable' =>     $this->isNextPageAvailable(),
+            'hasAnyResults' =>           $this->hasAnyResults(),
+            'countResults' =>            $this->countResults(),
+        ];
     }
 }
